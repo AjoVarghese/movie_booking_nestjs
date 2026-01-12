@@ -39,9 +39,9 @@ export class SeatsService {
   }
 
   async getSeatsByScreen(screenId: string) {
-    return this.seatModel.find({ screenId }).sort({ row: 1, number: 1 });
+    return this.seatModel.find({ screenId }, { _id: 1 }).sort({ row: 1, number: 1 });
   }
-
+  
   async bookSeat(seatId: string) {
     const seat = await this.seatModel.findById(seatId);
 
