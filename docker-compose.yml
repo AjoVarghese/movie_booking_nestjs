@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  api:
+    build: .
+    container_name: movie_booking_api
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+      - redis
+
+  mongo:
+    image: mongo:7
+    container_name: movie_booking_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:7
+    container_name: movie_booking_redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  mongo_data:
